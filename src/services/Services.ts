@@ -1,10 +1,21 @@
 import axios from 'axios';
+import { setupCache } from 'axios-cache-adapter';
 import { apiEndPoints } from './endPoint';
 
+// Create `axios-cache-adapter` instance
+const cache = setupCache({
+  maxAge: 15 * 60 * 1000
+});
+
+// Create `axios` instance passing the newly created `cache.adapter`
+const api = axios.create({
+  adapter: cache.adapter
+});
+
 export const getWeatherData = (city: string) => {
-  return axios.get(apiEndPoints.openWeatherApi(city));
+  return api.get(apiEndPoints.openWeatherApi(city));
 };
 
 export const getCity = (lat: number, long: number) => {
-  return axios.get(apiEndPoints.googleGeocodeAPI(lat, long));
+  return api.get(apiEndPoints.googleGeocodeAPI(lat, long));
 };

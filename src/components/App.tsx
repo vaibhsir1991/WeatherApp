@@ -8,9 +8,7 @@ const App = (): React.ReactElement => {
   return (
     <Provider store={AppState}>
       <GeoLocation />
-      <PageHeader>
-        This is to test {API_KEY} {}
-      </PageHeader>
+      <PageHeader>This is to test</PageHeader>
     </Provider>
   );
 };
