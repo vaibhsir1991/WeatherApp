@@ -5,7 +5,7 @@ export const Wrapper = styled.div`
   max-width: 100%;
   max-height: 100%;
   width: 350px;
-  height: 400px;
+  height: 360px;
   background-color: #ffcd00;
   margin-top: 32px;
   text-align: center;
@@ -20,7 +20,7 @@ export const Icon = styled.i`
 
 export const CityName = styled.p`
   font-size: 3rem;
-  margin: 32px 0 48px;
+  margin: 32px 0;
 `;
 
 export const Sperator = styled.div`

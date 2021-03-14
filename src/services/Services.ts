@@ -12,8 +12,12 @@ const api = axios.create({
   adapter: cache.adapter
 });
 
-export const getWeatherData = (city: string) => {
-  return api.get(apiEndPoints.openWeatherApi(city));
+export const getWeatherDataByCity = (city: string) => {
+  return api.get(apiEndPoints.openWeatherApiByCity(city));
+};
+
+export const getWeatherDataByCoordinates = (lat: number, long: number) => {
+  return api.get(apiEndPoints.openWeatherApiByCoordinates(lat, long));
 };
 
 export const getCity = (lat: number, long: number) => {

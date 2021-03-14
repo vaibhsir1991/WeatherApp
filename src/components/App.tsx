@@ -1,18 +1,23 @@
 import React from 'react';
 import { Provider } from 'react-redux';
-import { AppState } from '../redux/locationStateReducer';
+import { AppState } from '../redux/reducer';
 import GeoLocation from './_utils/GeoLocation/GeoLocation';
-import WeatherDetails from './WeatherDetails/WeatherDetails';
 import { Container } from './App.styles';
+import { Switch, Route, BrowserRouter } from 'react-router-dom';
+import WeatherAppContainer from './WeatherAppContainer/WeatherAppContainer';
 
 const App = (): React.ReactElement => {
   return (
-    <Provider store={AppState}>
-      <GeoLocation />
-      <Container>
-        <WeatherDetails />
-      </Container>
-    </Provider>
+    <BrowserRouter>
+      <Provider store={AppState}>
+        <Container>
+          <GeoLocation />
+          <Switch>
+            <Route path="" component={WeatherAppContainer} />
+          </Switch>
+        </Container>
+      </Provider>
+    </BrowserRouter>
   );
 };
 

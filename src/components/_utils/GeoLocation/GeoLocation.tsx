@@ -1,23 +1,22 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { setLocation } from '../../../redux/locationStateReducer';
+import { setLocation } from '../../../redux/actions';
 
-interface StateProps {
+interface DispatchProps {
   setLocation?: typeof setLocation;
 }
 
 const GeoLocation = ({
   setLocation
-}: StateProps): React.ReactElement | null => {
-  const [content, setContent] = React.useState<React.ReactNode | string>('');
-
+}: DispatchProps): React.ReactElement | null => {
   navigator.permissions
     .query({
       name: 'geolocation'
     })
     .then((result) => {
       if (result.state === 'denied') {
-        setContent(<h1>Please allow location access</h1>);
+        // eslint-disable-next-line no-alert
+        alert('Please allow location access or enter `?city=name` in URL');
       }
     });
 
@@ -29,7 +28,7 @@ const GeoLocation = ({
     if (setLocation) setLocation(payload);
   });
 
-  return <>{content}</>;
+  return null;
 };
 
 const mapDispatchToProps = {

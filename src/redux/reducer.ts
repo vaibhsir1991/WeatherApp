@@ -1,8 +1,14 @@
 import { createStore } from 'redux';
 
-const initialState = {
-  latitude: '',
-  longitude: '',
+interface State {
+  latitude: number;
+  longitude: number;
+  city: string;
+}
+
+const initialState: State = {
+  latitude: 0,
+  longitude: 0,
   city: ''
 };
 
@@ -27,14 +33,3 @@ const countReducer = (
 };
 
 export const AppState = createStore(countReducer);
-
-interface Location {
-  lat: number;
-  long: number;
-}
-
-export const setLocation = (location: Location) =>
-  AppState.dispatch({
-    type: 'SET_LOCATION',
-    payload: { location }
-  });

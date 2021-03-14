@@ -11,32 +11,35 @@ import {
   Wrapper
 } from './WeatherDetails.styles';
 import '../../css/weather-icons.css';
-import { weatherData } from '../../testing/mockWeatherData';
 import FormattedTempreture from '../_utils/FormattedTempreture/FormattedTempreture';
+import { mapClassToWeatherType } from '../_utils/mapClassToWeatherType';
 
-const WeatherDetails = (): React.ReactElement => {
-  const tempretureDetails = weatherData;
+interface Props {
+  weatherData: any;
+}
+
+const WeatherDetails = ({ weatherData }: Props): React.ReactElement => {
+  const weatherType = weatherData.weather[0].main;
+  const classForWeatherType = `wi ${mapClassToWeatherType(weatherType)}`;
+
   return (
     <Wrapper>
-      <CityName>{tempretureDetails.name}</CityName>
-      <Icon className="wi wi-day-lightning" />
+      <CityName>{weatherData.name}</CityName>
+      <Icon className={classForWeatherType} />
       <Sperator />
       <Details>
         <TempretureDiv>
-          <FormattedTempreture
-            tempreture={tempretureDetails.main.temp}
-            unit="C"
-          />
+          <FormattedTempreture tempreture={weatherData.main.temp} unit="C" />
         </TempretureDiv>
         <HumidityWindDiv>
           <HumidityWind>
             <i className="wi wi-humidity" />
             &nbsp;&nbsp;
-            {tempretureDetails.main.humidity} %
+            {weatherData.main.humidity} %
           </HumidityWind>
           <HumidityWind>
             <i className="wi wi-small-craft-advisory" />
-            &nbsp;&nbsp; {tempretureDetails.wind.speed.toFixed(2)} km/hr
+            &nbsp;&nbsp; {weatherData.wind.speed.toFixed(2)} km/hr
           </HumidityWind>
         </HumidityWindDiv>
       </Details>
