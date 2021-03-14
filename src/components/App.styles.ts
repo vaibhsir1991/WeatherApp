@@ -1,5 +1,7 @@
 import styled from '@emotion/styled';
 
-export const PageHeader = styled.h1`
-  color: red;
+export const Container = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;

@@ -1,7 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { setLocation } from '../../../redux/locationStateReducer';
-import { getWeatherData } from '../../../services/Services';
 
 interface StateProps {
   setLocation?: typeof setLocation;
@@ -28,18 +27,7 @@ const GeoLocation = ({
       long: position.coords.longitude
     };
     if (setLocation) setLocation(payload);
-    setContent(
-      <h1>{(position.coords.latitude, position.coords.longitude)}</h1>
-    );
   });
-
-  getWeatherData('Nagpur')
-    .then((data) => {
-      console.log(data);
-    })
-    .catch((e) => {
-      console.log(e);
-    });
 
   return <>{content}</>;
 };

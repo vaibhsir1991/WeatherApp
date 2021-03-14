@@ -7,12 +7,12 @@ module.exports = {
   devtool: 'inline-source-map',
   entry: './src/index.js',
   output: {
-    path: path.join(__dirname, './dist'),
+    path: path.join(__dirname, '../dist'),
     publicPath: '/',
     filename: 'bundle.js'
   },
   resolve: {
-    extensions: ['.js', '.jsx', '.ts', '.tsx']
+    extensions: ['.js', '.jsx', '.ts', '.tsx', '.scss']
   },
   devServer: {
     contentBase: './dist'
@@ -25,8 +25,20 @@ module.exports = {
         use: ['babel-loader', 'eslint-loader']
       },
       {
-        test: /\.css$/i,
-        use: ['style-loader', 'css-loader']
+        test: /\.(sa|sc|c)ss$/,
+        use: [
+          { loader: 'style-loader' },
+          { loader: 'css-loader', options: { modules: true } },
+          { loader: 'sass-loader' }
+        ]
+      },
+      {
+        test: /\.(woff|woff2|ttf|otf|eot)$/,
+        loader: 'file-loader'
+      },
+      {
+        test: /\.(png|woff|woff2|eot|ttf|svg)$/,
+        use: ['url-loader?limit=100000']
       }
     ]
   },
@@ -38,7 +50,10 @@ module.exports = {
       inject: 'body'
     }),
     new CopyPlugin({
-      patterns: [{ from: './src/font', to: './dist' }]
+      patterns: [
+        { from: './src/font', to: './font' },
+        { from: './src/css', to: './css' }
+      ]
     })
   ]
 };
