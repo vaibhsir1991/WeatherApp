@@ -2,14 +2,33 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 var path = require('path');
 const Dotenv = require('dotenv-webpack');
 const CopyPlugin = require('copy-webpack-plugin');
+const TerserPlugin = require('terser-webpack-plugin');
 
 module.exports = {
   devtool: 'inline-source-map',
   entry: './src/index.js',
   output: {
-    path: path.join(__dirname, '../dist'),
+    path: path.resolve(__dirname, 'dist'),
     publicPath: '/',
-    filename: 'bundle.js'
+    filename: '[name].[contenthash].js'
+  },
+  optimization: {
+    runtimeChunk: 'single',
+    splitChunks: {
+      cacheGroups: {
+        vendor: {
+          test: /[\\/]node_modules[\\/]/,
+          name: 'vendors',
+          chunks: 'all'
+        }
+      }
+    },
+    minimize: true,
+    minimizer: [
+      new TerserPlugin({
+        test: /\.js(\?.*)?$/i
+      })
+    ]
   },
   resolve: {
     extensions: ['.js', '.jsx', '.ts', '.tsx', '.scss']
