@@ -1,15 +1,6 @@
 /* eslint-disable space-infix-ops */
 import React from 'react';
-import {
-  CityName,
-  Details,
-  HumidityWind,
-  HumidityWindDiv,
-  Icon,
-  Sperator,
-  TempretureDiv,
-  Wrapper
-} from './WeatherDetails.styles';
+import * as Styled from './WeatherDetails.styles';
 import '../../css/weather-icons.css';
 import FormattedTempreture from '../_utils/FormattedTempreture/FormattedTempreture';
 import { mapClassToWeatherType } from '../_utils/mapClassToWeatherType';
@@ -23,27 +14,27 @@ const WeatherDetails = ({ weatherData }: Props): React.ReactElement => {
   const classForWeatherType = `wi ${mapClassToWeatherType(weatherType)}`;
 
   return (
-    <Wrapper>
-      <CityName>{weatherData.name}</CityName>
-      <Icon className={classForWeatherType} />
-      <Sperator />
-      <Details>
-        <TempretureDiv>
+    <Styled.Wrapper color={Styled.getBackgroundColor(weatherData.main.temp)}>
+      <Styled.CityName>{weatherData.name}</Styled.CityName>
+      <Styled.Icon className={classForWeatherType} />
+      <Styled.Sperator />
+      <Styled.Details>
+        <Styled.TempretureDiv>
           <FormattedTempreture tempreture={weatherData.main.temp} unit="C" />
-        </TempretureDiv>
-        <HumidityWindDiv>
-          <HumidityWind>
+        </Styled.TempretureDiv>
+        <Styled.HumidityWindDiv>
+          <Styled.HumidityWind>
             <i className="wi wi-humidity" />
             &nbsp;&nbsp;
             {weatherData.main.humidity} %
-          </HumidityWind>
-          <HumidityWind>
+          </Styled.HumidityWind>
+          <Styled.HumidityWind>
             <i className="wi wi-small-craft-advisory" />
             &nbsp;&nbsp; {weatherData.wind.speed.toFixed(2)} km/hr
-          </HumidityWind>
-        </HumidityWindDiv>
-      </Details>
-    </Wrapper>
+          </Styled.HumidityWind>
+        </Styled.HumidityWindDiv>
+      </Styled.Details>
+    </Styled.Wrapper>
   );
 };
 
