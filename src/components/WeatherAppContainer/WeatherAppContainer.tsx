@@ -1,12 +1,13 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import WeatherDetails from './WeatherDetails';
 import { useLocation } from 'react-router-dom';
 import {
   getWeatherDataByCity,
   getWeatherDataByCoordinates
 } from '../../services/Services';
 import { AxiosError, AxiosResponse } from 'axios';
+
+const WeatherDetails = React.lazy(() => import('./WeatherDetails'));
 
 interface StateProps {
   latitude: number;

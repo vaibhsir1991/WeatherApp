@@ -2,8 +2,11 @@
 import React from 'react';
 import * as Styled from './WeatherDetails.styles';
 import '../../css/weather-icons.css';
-import FormattedTempreture from '../_utils/FormattedTempreture/FormattedTempreture';
 import { mapClassToWeatherType } from '../_utils/mapClassToWeatherType';
+
+const FormattedTempreture = React.lazy(
+  () => import('../_utils/FormattedTempreture/FormattedTempreture')
+);
 
 interface Props {
   weatherData: any;
