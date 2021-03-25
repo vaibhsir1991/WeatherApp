@@ -15,7 +15,6 @@ const GeoLocation = ({
     })
     .then((result) => {
       if (result.state === 'denied') {
-        // eslint-disable-next-line no-alert
         alert('Please allow location access or enter `?city=name` in URL');
       }
     });

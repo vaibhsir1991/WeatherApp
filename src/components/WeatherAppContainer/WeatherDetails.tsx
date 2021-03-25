@@ -1,10 +1,10 @@
 /* eslint-disable space-infix-ops */
+import { mapClassToWeatherType } from 'components/_utils/mapClassToWeatherType';
 import React from 'react';
 import * as Styled from './WeatherDetails.styles';
-import { mapClassToWeatherType } from '../_utils/mapClassToWeatherType';
 
 const FormattedTempreture = React.lazy(
-  () => import('../_utils/FormattedTempreture/FormattedTempreture')
+  () => import('components/_shared/FormattedTempreture/FormattedTempreture')
 );
 
 interface Props {

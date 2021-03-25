@@ -4,11 +4,13 @@ const Dotenv = require('dotenv-webpack');
 const CopyPlugin = require('copy-webpack-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
 
+const pathname = process.cwd();
+
 module.exports = {
   devtool: 'inline-source-map',
   entry: './src/index.js',
   output: {
-    path: path.resolve(__dirname, '../dist'),
+    path: path.resolve(pathname, 'dist'),
     publicPath: '/',
     filename: '[name].[contenthash].js'
   },
@@ -31,7 +33,8 @@ module.exports = {
     ]
   },
   resolve: {
-    extensions: ['.js', '.jsx', '.ts', '.tsx', '.scss']
+    extensions: ['.js', '.jsx', '.ts', '.tsx', '.scss'],
+    modules: ['src', 'node_modules']
   },
   devServer: {
     contentBase: './dist'

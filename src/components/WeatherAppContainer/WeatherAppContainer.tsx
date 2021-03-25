@@ -1,11 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { useLocation } from 'react-router-dom';
-import {
-  getWeatherDataByCity,
-  getWeatherDataByCoordinates
-} from '../../services/Services';
 import { AxiosError, AxiosResponse } from 'axios';
+import { getWeatherDataByCity, getWeatherDataByCoordinates } from 'services/weatherServices';
 
 const WeatherDetails = React.lazy(() => import('./WeatherDetails'));
 
@@ -28,7 +25,6 @@ const WeatherAppContainer = ({
         .then((res: AxiosResponse) => {
           setWeatherData(res.data);
         })
-        // eslint-disable-next-line no-alert
         .catch((e: AxiosError) => alert(e.message));
     } else {
       navigator.geolocation.getCurrentPosition((position) => {
@@ -39,7 +35,6 @@ const WeatherAppContainer = ({
           .then((res: AxiosResponse) => {
             setWeatherData(res.data);
           })
-          // eslint-disable-next-line no-alert
           .catch((e: AxiosError) => alert(e.message));
       });
     }
