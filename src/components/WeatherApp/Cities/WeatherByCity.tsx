@@ -1,12 +1,11 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { useLocation } from 'react-router-dom';
 import { AxiosError, AxiosResponse } from 'axios';
-import { countries } from 'testing/mockCountries';
 import {
   Container,
   FormControl,
   InputLabel,
+  Link,
   MenuItem,
   Select
 } from '@material-ui/core';
@@ -33,8 +32,6 @@ const WeatherAppContainer = ({
   latitude,
   longitude
 }: StateProps): React.ReactElement | null => {
-  let params = useLocation().search;
-  let city = new URLSearchParams(params).get('city');
   let [countryList, setCountryList] = React.useState<Array<CountryAndCity>>();
   let [weatherData, setWeatherData] = React.useState();
   let [selectedCountry, setSelectedCountry] = React.useState<string>();
@@ -70,6 +67,7 @@ const WeatherAppContainer = ({
 
   return (
     <Container maxWidth="sm">
+      <Link href="/home">My Location</Link>
       <FormControl fullWidth>
         <InputLabel id="country">Country</InputLabel>
         <Select
@@ -90,6 +88,8 @@ const WeatherAppContainer = ({
             ))}
         </Select>
       </FormControl>
+      <br />
+      <br />
       <FormControl fullWidth>
         <InputLabel id="city">City</InputLabel>
         <Select

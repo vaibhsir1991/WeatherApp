@@ -6,6 +6,7 @@ import {
   getWeatherDataByCity,
   getWeatherDataByCoordinates
 } from 'services/weatherServices';
+import { Container, Link } from '@material-ui/core';
 
 const WeatherDetails = React.lazy(() => import('./WeatherDetails'));
 
@@ -43,7 +44,12 @@ const WeatherAppContainer = ({
     }
   }, []);
 
-  return weatherData ? <WeatherDetails weatherData={weatherData} /> : null;
+  return weatherData ? (
+    <Container maxWidth="sm">
+      <Link href="/">Go Back</Link>
+      <WeatherDetails weatherData={weatherData} />
+    </Container>
+  ) : null;
 };
 
 const mapStateToProps = (state: {
