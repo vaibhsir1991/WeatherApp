@@ -3,13 +3,18 @@ import { Provider } from 'react-redux';
 import { AppState } from '../redux/reducer';
 import { Container } from './App.styles';
 import { Switch, Route, BrowserRouter } from 'react-router-dom';
+import { CircularProgress } from '@material-ui/core';
 
 const GeoLocation = React.lazy(
   () => import('./_utils/GeoLocation/GeoLocation')
 );
 
-const WeatherAppContainer = React.lazy(
-  () => import('./WeatherAppContainer/WeatherAppContainer')
+const CurrentLocationWeather = React.lazy(
+  () => import('./WeatherApp/CurrentLocationWeather/CurrentLocationWeather')
+);
+
+const WeatherByCity = React.lazy(
+  () => import('./WeatherApp/Cities/WeatherByCity')
 );
 
 const App = (): React.ReactElement => {
@@ -17,10 +22,11 @@ const App = (): React.ReactElement => {
     <BrowserRouter>
       <Provider store={AppState}>
         <Container>
-          <Suspense fallback={<h1>'Loading,PLease Wait...'</h1>}>
+          <Suspense fallback={<CircularProgress />}>
             <GeoLocation />
             <Switch>
-              <Route path="" component={WeatherAppContainer} />
+              <Route path="/home" component={CurrentLocationWeather} />
+              <Route exact path="/" component={WeatherByCity} />
             </Switch>
           </Suspense>
         </Container>

@@ -37,7 +37,8 @@ module.exports = {
     modules: ['src', 'node_modules']
   },
   devServer: {
-    contentBase: './dist'
+    contentBase: './dist',
+    historyApiFallback: true
   },
   module: {
     rules: [

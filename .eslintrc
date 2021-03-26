@@ -13,6 +13,7 @@
   "rules": {
     "indent": "off",
     "space-before-function-paren": "off",
-    "no-alert": "off"
+    "no-alert": "off",
+    "no-unused-vars": "warn"
   }
 }

@@ -13,9 +13,7 @@ export const getBackgroundColor = (tempInKelvin: number): string => {
 export const Wrapper = styled.div(
   {
     maxWidth: '100%',
-    maxHeight: '100%',
-    width: '300px',
-    height: '350px',
+    height: '100%',
     marginTop: '32px',
     textAlign: 'center',
     padding: '32px',
@@ -54,7 +52,7 @@ export const TempretureDiv = styled.div`
 `;
 
 export const HumidityWindDiv = styled.div`
-  width: 50%;
+  width: 60%;
 `;
 
 export const HumidityWind = styled.p`

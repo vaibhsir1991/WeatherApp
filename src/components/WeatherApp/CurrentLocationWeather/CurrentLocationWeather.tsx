@@ -2,7 +2,10 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { useLocation } from 'react-router-dom';
 import { AxiosError, AxiosResponse } from 'axios';
-import { getWeatherDataByCity, getWeatherDataByCoordinates } from 'services/weatherServices';
+import {
+  getWeatherDataByCity,
+  getWeatherDataByCoordinates
+} from 'services/weatherServices';
 
 const WeatherDetails = React.lazy(() => import('./WeatherDetails'));
 

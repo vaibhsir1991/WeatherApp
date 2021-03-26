@@ -23,3 +23,7 @@ export const getWeatherDataByCoordinates = (lat: number, long: number) => {
 export const getCity = (lat: number, long: number) => {
   return api.get(apiEndPoints.googleGeocodeAPI(lat, long));
 };
+
+export const getCountriesAndCity = () => {
+  return api.get(apiEndPoints.countriesAndCities);
+};
