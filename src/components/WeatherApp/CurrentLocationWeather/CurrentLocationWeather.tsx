@@ -7,18 +7,14 @@ import {
   getWeatherDataByCoordinates
 } from 'services/weatherServices';
 import { Container, Link } from '@material-ui/core';
+import WeatherDetails from './WeatherDetails';
 
-const WeatherDetails = React.lazy(() => import('./WeatherDetails'));
-
-interface StateProps {
+interface Props {
   latitude: number;
   longitude: number;
 }
 
-const WeatherAppContainer = ({
-  latitude,
-  longitude
-}: StateProps): React.ReactElement | null => {
+const WeatherAppContainer = (props: Props): React.ReactElement | null => {
   let params = useLocation().search;
   let city = new URLSearchParams(params).get('city');
   let [weatherData, setWeatherData] = React.useState();
@@ -31,16 +27,11 @@ const WeatherAppContainer = ({
         })
         .catch((e: AxiosError) => alert(e.message));
     } else {
-      navigator.geolocation.getCurrentPosition((position) => {
-        getWeatherDataByCoordinates(
-          position.coords.latitude,
-          position.coords.longitude
-        )
-          .then((res: AxiosResponse) => {
-            setWeatherData(res.data);
-          })
-          .catch((e: AxiosError) => alert(e.message));
-      });
+      getWeatherDataByCoordinates(props.latitude, props.longitude)
+        .then((res: AxiosResponse) => {
+          setWeatherData(res.data);
+        })
+        .catch((e: AxiosError) => alert(e.message));
     }
   }, []);
 
@@ -53,11 +44,10 @@ const WeatherAppContainer = ({
 };
 
 const mapStateToProps = (state: {
-  latitude: number;
-  longitude: number;
-}): StateProps => ({
-  latitude: state.latitude,
-  longitude: state.longitude
+  location: { latitude: number; longitude: number };
+}) => ({
+  latitude: state.location.latitude,
+  longitude: state.location.longitude
 });
 
 export default connect(mapStateToProps, null)(WeatherAppContainer);

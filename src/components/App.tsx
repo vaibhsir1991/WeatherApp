@@ -1,6 +1,6 @@
 import React, { Suspense } from 'react';
 import { Provider } from 'react-redux';
-import { AppState } from '../redux/reducer';
+import store from 'redux/store';
 import { Container } from './App.styles';
 import { Switch, Route, BrowserRouter } from 'react-router-dom';
 import { CircularProgress } from '@material-ui/core';
@@ -20,7 +20,7 @@ const WeatherByCity = React.lazy(
 const App = (): React.ReactElement => {
   return (
     <BrowserRouter>
-      <Provider store={AppState}>
+      <Provider store={store}>
         <Container>
           <Suspense fallback={<CircularProgress />}>
             <GeoLocation />

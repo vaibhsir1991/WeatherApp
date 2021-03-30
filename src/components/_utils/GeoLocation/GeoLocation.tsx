@@ -1,14 +1,14 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { setLocation } from '../../../redux/actions';
+import { setLocation } from 'redux/actions';
 
-interface DispatchProps {
+interface Props {
   setLocation?: typeof setLocation;
+  latitude: number;
+  longitude: number;
 }
 
-const GeoLocation = ({
-  setLocation
-}: DispatchProps): React.ReactElement | null => {
+const GeoLocation = (props: Props): React.ReactElement | null => {
   navigator.permissions
     .query({
       name: 'geolocation'
@@ -24,14 +24,22 @@ const GeoLocation = ({
       lat: position.coords.latitude,
       long: position.coords.longitude
     };
-    if (setLocation) setLocation(payload);
+    if (props.setLocation) props.setLocation(payload);
+    console.log(props.latitude, props.longitude);
   });
 
   return null;
 };
 
+const mapStateToProps = (state: {
+  location: { latitude: any; longitude: any };
+}) => ({
+  latitude: state.location.latitude,
+  longitude: state.location.longitude
+});
+
 const mapDispatchToProps = {
   setLocation: setLocation
 };
 
-export default connect(null, mapDispatchToProps)(GeoLocation);
+export default connect(mapStateToProps, mapDispatchToProps)(GeoLocation);

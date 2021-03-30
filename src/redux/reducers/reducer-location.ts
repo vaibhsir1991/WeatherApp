@@ -1,5 +1,3 @@
-import { createStore } from 'redux';
-
 interface State {
   latitude: number;
   longitude: number;
@@ -12,24 +10,26 @@ const initialState: State = {
   city: ''
 };
 
-const countReducer = (
-  state = initialState,
+const locationReducer = (
+  state: State = initialState,
   action: { type: any; payload: any }
 ) => {
   switch (action.type) {
     case 'SET_LOCATION':
       return {
         ...state,
-        latitude: action.payload.lat,
-        longitude: action.payload.long
+        latitude: action.payload.location.lat,
+        longitude: action.payload.location.long
       };
     case 'SET_CITY':
       return { ...state, city: action.payload.city };
+
     case 'RESET':
       return { ...initialState };
+
     default:
-      return { ...state };
+      return state;
   }
 };
 
-export const AppState = createStore(countReducer);
+export default locationReducer;
